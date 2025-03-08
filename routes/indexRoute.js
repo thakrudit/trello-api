@@ -20,6 +20,7 @@ router.post("/close-board", requireAuthentication, IndexController.closeBoard)
 
 router.post("/create-dashbord-card", requireAuthentication, IndexController.createDashbordCard)
 router.get("/display-dashbord-card", requireAuthentication, IndexController.displayDashbordCard)
+router.post("/update-dashbord-card", requireAuthentication, IndexController.updateDashbordCard)
 
 router.post("/create-child-card", requireAuthentication, IndexController.createChildCard)
 router.get("/get-child-card", requireAuthentication, IndexController.getChildCard)

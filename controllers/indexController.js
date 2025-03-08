@@ -106,8 +106,7 @@ module.exports = {
 
     getBoards: async (req, res) => {
         try {
-            const { id } = req.user
-            console.log("===========++++++++++++++++++++++++++++++++++++++>", id)
+            const { id } = req.user;
 
             // USER OWN BOARDS
             const data_1 = await Board.findAll({
@@ -167,24 +166,21 @@ module.exports = {
                 include: [
                     {
                         model: DashbordCard,
+                        separate: true,
+                        order: [['id', 'ASC']],
                         include: [
                             {
                                 model: ChildCard,
                                 where: { is_archive: false },
-                                required: false
+                                required: false,
+                                separate: true,
+                                order: [['id', 'ASC']],
                             }
                         ]
-
                     }
                 ]
             })
-            // if (data && data.dashbord_cards) {
-            //     data.dashbord_cards.sort((a, b) => {
-            //         const aHasChildren = a.child_cards && a.child_cards.length > 0;
-            //         const bHasChildren = b.child_cards && b.child_cards.length > 0;
-            //         return aHasChildren - bHasChildren;
-            //     });
-            // }
+            // data.dashbord_cards = data.dashbord_cards.sort((a, b) => a.id - b.id);
             if (!data) {
                 return helper.error(res, "Board not found")
             }
@@ -255,6 +251,26 @@ module.exports = {
         }
     },
 
+    updateDashbordCard: async (req, res) => {
+        try {
+            const { d_c_id, newListTitle } = req.body;
+            if (!d_c_id || !newListTitle) {
+                return helper.error(res, "Required field missing")
+            }
+
+            const data = await DashbordCard.findOne({ where: { id: d_c_id } })
+            if (!data) {
+                return helper.error(res, "Dashbord card not found")
+            }
+            data.title = newListTitle
+            data.save();
+
+            return helper.success(res, "Dashbord card updated successfully", data)
+        } catch (err) {
+            return helper.error(res, err)
+        }
+    },
+
 
     createChildCard: async (req, res) => {
         try {
@@ -286,10 +302,8 @@ module.exports = {
                 return helper.error(res, "Child card not found")
             }
             return helper.success(res, "Getting card successfully", data)
-
         } catch (err) {
             return helper.error(res, err)
-
         }
     },
 
