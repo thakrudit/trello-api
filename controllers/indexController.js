@@ -308,6 +308,42 @@ module.exports = {
     },
 
 
+    updateChildCardTitle: async (req, res) => {
+        try {
+            const { c_id, title } = req.body;
+
+            if (!c_id || !title) {
+                return helper.error(res, "Required field missing")
+            }
+            const data = await ChildCard.findOne({
+                where: { id: c_id },
+            })
+            data.title = title
+            data.save();
+            return helper.success(res, "Child cards title updated successfully", data)
+        } catch (err) {
+            return helper.error(res, err)
+        }
+    },
+
+    updateChildCardDescription: async (req, res) => {
+        try {
+            const { c_id, description } = req.body;
+
+            if (!c_id || !description) {
+                return helper.error(res, "Required field missing")
+            }
+            const data = await ChildCard.findOne({
+                where: { id: c_id },
+            })
+            data.description = description
+            data.save();
+            return helper.success(res, "Child cards description updated successfully", data)
+        } catch (err) {
+            return helper.error(res, err)
+        }
+    },
+
     updateChildCardStatus: async (req, res) => {
         try {
             const { id, is_checked } = req.body;

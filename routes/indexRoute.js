@@ -25,6 +25,8 @@ router.post("/update-dashbord-card", requireAuthentication, IndexController.upda
 router.post("/create-child-card", requireAuthentication, IndexController.createChildCard)
 router.get("/get-child-card", requireAuthentication, IndexController.getChildCard)
 
+router.post("/update-child-card-title", requireAuthentication, IndexController.updateChildCardTitle)
+router.post("/update-child-card-description", requireAuthentication, IndexController.updateChildCardDescription)
 router.post("/update-child-card-status", requireAuthentication, IndexController.updateChildCardStatus)
 router.post("/update-child-card", requireAuthentication, IndexController.updateChildCard)
 router.post("/child-card-archive", requireAuthentication, IndexController.childCardArchive)
