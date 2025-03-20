@@ -554,7 +554,7 @@ module.exports = {
 
             await screenshot({ filename: savePath });
 
-            const fileUrl = `http://localhost:4321/uploads/${result}`;
+            const fileUrl = `https://trello-api-n7fb.onrender.com/uploads/${result}`;
 
             const data = await Screenshots.create({
                 card_id,
@@ -838,7 +838,7 @@ module.exports = {
                 if (err) throw err
             });
 
-            const name = "localhost:4321/uploads/" + result
+            const name = "https://trello-api-n7fb.onrender.com/uploads/" + result
             return helper.success(res, "File uploaded successfully", name);
         } catch (err) {
             return helper.error(res, err)

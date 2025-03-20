@@ -13,7 +13,8 @@ const server = require("http").createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173",
+        // origin: "http://localhost:5173",
+        origin: "https://trello-test-t.netlify.app",
         methods: ["GET", "POST"],
     },
 });
